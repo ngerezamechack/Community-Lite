@@ -32,7 +32,9 @@ public class Main extends Application{
     public void start(Stage s) throws Exception {
         
         BorderPane pan = (BorderPane) FXMLLoader.load(getClass().getResource("main.fxml"));
-        s.setScene(new Scene(pan));
+        Scene scene = new Scene(pan);
+        scene.getStylesheets();
+        s.setScene(scene);
         
         s.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
