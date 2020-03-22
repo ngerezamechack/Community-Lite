@@ -13,6 +13,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.sql.Date;
+import java.time.Duration;
 import java.time.LocalDate;
 import javafx.collections.ObservableList;
 import javax.json.Json;
@@ -109,10 +110,13 @@ public class DAuth extends DAO<Oauth> {
     //recuperer la clé d'acces
     private boolean getToken(Oauth o) throws Exception{
         
-        client = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).build();
+        client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_1_1)
+                .connectTimeout(Duration.ofSeconds(30))
+                .build();
         
         String url = "https://api.orange.com/oauth/v2/token";
-        //pr�paration de la requette
+        //préparation de la requette
         request = HttpRequest.newBuilder().uri(new URI(url))
                 .header("content-type", "application/x-www-form-urlencoded;charset=utf-8")
                 .header("Authorization", o.getAuthorization())
@@ -159,7 +163,7 @@ public class DAuth extends DAO<Oauth> {
             
             if(oauth.getToken() == null || oauth.getToken().isBlank()){
                 if(!this.getToken(oauth)){
-                    throw new Exception("Recup�ration de la cl� �chou�e!");
+                    throw new Exception("Recupération de la clé échouée!");
                 }
             }else{
                 

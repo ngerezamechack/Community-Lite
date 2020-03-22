@@ -55,7 +55,15 @@ public class Contact {
     public void setNom(String nom){
         this.nom.set(nom);
     }
-    public String getNom(){
-        return nom.get().toUpperCase();
+    public StringProperty getNom(){
+        return nom;
     }
+
+    @Override
+    public String toString() {
+        return this.nom.get().charAt(0)+" "+this.numero.get()+" "+this.nom.get();
+    }
+    
+    
+    
 }

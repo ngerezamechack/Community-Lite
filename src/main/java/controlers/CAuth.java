@@ -25,7 +25,7 @@ public class CAuth extends AnchorPane{
     @FXML
     private TextField tauth,tname,tnum;
     
-    //les données
+    //les donnï¿½es
     private DAuth dauth = new DAuth();
     private Oauth oauth = new Oauth();
     
@@ -50,7 +50,7 @@ public class CAuth extends AnchorPane{
     private void valider(ActionEvent ev){
         //verification de champs
         if(Boite.verfier(tauth,tname,tnum)){
-           //initialisation des données
+           //initialisation des donnï¿½es
             oauth = new Oauth();
             oauth.setAuthorization(tauth.getText());
             oauth.setSenderName(tname.getText());
@@ -65,14 +65,14 @@ public class CAuth extends AnchorPane{
                    if((dauth.get(oauth))  != null){
             
                        if(dauth.replace(oauth)){
-                           Boite.showInformation("Modification effectuée", "Validation", Alert.AlertType.INFORMATION);
+                           Boite.showInformation("Modification effectuÃ©e", "Validation", Alert.AlertType.INFORMATION);
                            actualiser();
                        }
                        
                     }else{//sinon on l'ajoute
                        
                        if(dauth.create(oauth)){
-                           Boite.showInformation("Modification effectuée", "Validation", Alert.AlertType.INFORMATION);
+                           Boite.showInformation("Modification effectuÃ©e", "Validation", Alert.AlertType.INFORMATION);
                            actualiser();
                        }
                        

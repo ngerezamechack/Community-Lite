@@ -12,9 +12,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="840.0" style="-fx-border-color: blue; -fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.CContact">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="840.0" style="-fx-border-color: blue; -fx-background-color: white;" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="tableau" layoutX="378.0" layoutY="68.0" onMouseClicked="#tableau" prefHeight="401.0" prefWidth="441.0" />
       <Label layoutX="379.0" layoutY="40.0" text="Recherche" />
       <Label layoutX="40.0" layoutY="40.0" text="ID" />
       <Label layoutX="40.0" layoutY="101.0" text="Numéro" />
@@ -34,5 +33,7 @@
       </Button>
       <Button layoutX="208.0" layoutY="232.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
       <Button layoutX="295.0" layoutY="232.0" mnemonicParsing="false" onAction="#rafraichir" text="Rafrachir" />
+      <Hyperlink fx:id="notif" contentDisplay="RIGHT" layoutX="377.0" layoutY="442.0" prefHeight="23.0" prefWidth="441.0" text="Messages" />
+      <TableView fx:id="tableau" focusTraversable="false" layoutX="377.0" layoutY="70.0" onMouseClicked="#tableau" prefHeight="366.0" prefWidth="441.0" />
    </children>
-</AnchorPane>
+</fx:root>

@@ -15,13 +15,14 @@
 
 <BorderPane fx:id="pan" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="733.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlers.Menu">
    <bottom>
-      <FlowPane alignment="CENTER" prefHeight="72.0" prefWidth="733.0" BorderPane.alignment="CENTER">
+      <FlowPane alignment="CENTER" hgap="5.0" prefHeight="72.0" prefWidth="733.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="71.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="52.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/fufu.png" />
+                  <Image url="@../images/NGEREZAs.png" />
                </image>
             </ImageView>
+            <Label text="ngerezam@gmail.com" />
          </children>
       </FlowPane>
    </bottom>

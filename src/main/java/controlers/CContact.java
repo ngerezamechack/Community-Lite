@@ -8,10 +8,6 @@ package controlers;
 import beans.Boite;
 import beans.Contact;
 import donnees.DContact;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -19,44 +15,59 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
 /**
  *
  * @author NGEREZA
  */
-public class CContact implements Initializable {
+public class CContact extends AnchorPane {
 
     @FXML
-    TableView<Contact> tableau;
-    private TableColumn<Contact, Number> col_id;
-    private TableColumn<Contact, String> col_num, col_nom;
+    private TableView<Contact> tableau;
+    private TableColumn<Contact, CLigne> colone;
 
     @FXML
     private TextField tid, tnum, tnom, tch;
     @FXML
     private TextArea tm;
+    @FXML
+    private Hyperlink notif;
 
     private DContact dc = new DContact();
-    private Contact cont;
+    private Contact cont = new Contact();
+    private CMessage cm = new CMessage();
 
     public CContact() {
-        cont = new Contact();
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/vues/contact.fxml"));
+        load.setRoot(this);
+        load.setController(this);
+
+        try {
+            load.load();
+            initTable();
+            effacer();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
 
-    //créer un contact
+    //crï¿½er un contact
     @FXML
     private void ajouter(ActionEvent ev) {
 
         //verification des champs
-        if (Boite.verfier(tnum,tnom)) {
+        if (Boite.verfier(tnum, tnom)) {
 
             cont = new Contact();
             cont.setId((int) (System.currentTimeMillis() / 100));
@@ -64,19 +75,40 @@ public class CContact implements Initializable {
             cont.setNom(tnom.getText());
 
             try {
-                if (Boite.showConfirmation("Créer le contact?", "Ajout")) {
+                if (Boite.showConfirmation("CrÃ©er le contact?", "Ajout")) {
                     if (dc.create(cont)) {
                         effacer();
-                        Boite.showInformation("Contact créer", "Ajout", Alert.AlertType.INFORMATION);
+                        Boite.showInformation("Contact crÃ©er", "Ajout", Alert.AlertType.INFORMATION);
                     }
                 }
             } catch (Exception ex) {
                 Boite.showException(ex, "Ajout");
             }
 
-        } 
+        }
     }
 
+    /*
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    ***
+    
+    *
+    ****
+    
+    
+    *
+    *
+    *
+    
+     */
     //recherche
     @FXML
     private void chercher(Event ev) {
@@ -103,16 +135,37 @@ public class CContact implements Initializable {
             cont = tableau.getSelectionModel().getSelectedItem();
             tid.setText(String.valueOf(cont.getId()));
             tnum.setText(cont.getNumero());
-            tnom.setText(cont.getNom());
+            tnom.setText(cont.getNom().get());
         }
     }
 
+    /*
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    ***
+    
+    *
+    ****
+    
+    
+    *
+    *
+    *
+    
+     */
     //modifier un contact
     @FXML
     private void modifier(ActionEvent ev) {
 
         //verification des champs
-        if (Boite.verfier(tid,tnum,tnom)) {
+        if (Boite.verfier(tid, tnum, tnom)) {
 
             cont = new Contact();
             cont.setId(Integer.valueOf(tid.getText()));
@@ -124,28 +177,47 @@ public class CContact implements Initializable {
                     //execution
                     if (dc.replace(cont)) {
                         effacer();
-                        Boite.showInformation("Contact modifié", "Modification", Alert.AlertType.INFORMATION);
+                        Boite.showInformation("Contact modifiÃ©", "Modification", Alert.AlertType.INFORMATION);
                     }
                 }
             } catch (Exception ex) {
                 Boite.showException(ex, "Modification");
             }
-
-        } 
+        }
 
     }
 
+    /*
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    ***
+    
+    *
+    ****
+    
+    
+    *
+    *
+    *
+    
+     */
     //supprimer un contact
     @FXML
     private void supprimer(ActionEvent ev) {
 
         if ((cont = tableau.getSelectionModel().getSelectedItem()) != null) {
-
             try {
                 if (Boite.showConfirmation("Enlever le contact", "Suppression")) {
                     if (dc.delete(cont)) {
                         effacer();
-                        Boite.showInformation("Contact enlevé", "Suppression", Alert.AlertType.INFORMATION);
+                        Boite.showInformation("Contact enlevÃ©", "Suppression", Alert.AlertType.INFORMATION);
                     }
                 }
             } catch (Exception ex) {
@@ -158,6 +230,27 @@ public class CContact implements Initializable {
 
     }
 
+    /*
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    ***
+    
+    *
+    ****
+    
+    
+    *
+    *
+    *
+    
+     */
     //envoyer un messgae
     @FXML
     private void envoyer(ActionEvent ev) {
@@ -171,19 +264,14 @@ public class CContact implements Initializable {
                         @Override
                         protected Object call() throws Exception {
 
-                            CMessage cm = new CMessage();
-                            try{
-                                cm.sendMessage(tableau.getSelectionModel().getSelectedItems(),
+                            cm.sendMessage(tableau.getSelectionModel().getSelectedItems(),
                                     tm.getText());
-                            }catch(Exception ex){
-                                ex.printStackTrace();
-                            }
 
                             Platform.runLater(() -> {
                                 try {
                                     effacer();
                                 } catch (Exception ex) {
-                                    Logger.getLogger(CContact.class.getName()).log(Level.SEVERE, null, ex);
+                                    ex.printStackTrace();
                                 }
                             });
                             return null;
@@ -194,17 +282,59 @@ public class CContact implements Initializable {
             } else {
                 Boite.showInformation("Ecrire un message", "message", Alert.AlertType.WARNING);
             }
-
         } else {
             Boite.showInformation("Selectionner au moins un contact", "message", Alert.AlertType.WARNING);
         }
-
     }
 
+    //envoyer les brouillon
+    @FXML
+    private void envoiBrouilon(ActionEvent ev) {
+        if (Boite.showConfirmation("Envoyer le(s) message(s) ?", "Brouillon")) {
+            Boite.executeTache(new Task() {
+                @Override
+                protected Object call() throws Exception {
+
+                    cm.envoiBrouillon();
+                    Platform.runLater(() -> {
+                        try {
+                            effacer();
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+                    return null;
+                }
+            });
+        }
+    }
+
+    /*
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    ***
+    
+    *
+    ****
+    
+    
+    *
+    *
+    *
+    
+     */
     @FXML
     private void rafraichir(ActionEvent ev) {
         try {
             effacer();
+
         } catch (Exception ex) {
             Boite.showException(ex, "Rafraichir");
         }
@@ -215,53 +345,51 @@ public class CContact implements Initializable {
         tnum.clear();
         tnom.clear();
         tm.clear();
-        initTable();
+        tableau.setItems(dc.getList());
+
+        if (cm.brouillon() > 0) {
+            notif.setText(cm.brouillon() + " Message(s) non envoyÃ©(s)");
+            notif.setVisible(true);
+        } else {
+            notif.setVisible(false);
+        }
+
     }
 
+    /*
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    ***
+    
+    *
+    ****
+    
+    
+    *
+    *
+    *
+    
+     */
     //tableau
     private void initTable() {
         tableau.getColumns().clear();
         tableau.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        //colone id
-        col_id = new TableColumn<>("ID");
-        col_id.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Contact, Number>, ObservableValue<Number>>() {
+        colone = new TableColumn<>();
+        colone.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Contact, CLigne>, ObservableValue<CLigne>>() {
             @Override
-            public ObservableValue<Number> call(TableColumn.CellDataFeatures<Contact, Number> p) {
-                return new SimpleObjectProperty<>(p.getValue().getId());
+            public ObservableValue<CLigne> call(TableColumn.CellDataFeatures<Contact, CLigne> param) {
+                return new SimpleObjectProperty<>(new CLigne(param.getValue(), colone.getWidth()));
             }
         });
-        tableau.getColumns().add(col_id);
-
-        //colone numéro
-        col_num = new TableColumn<>("Numéro");
-        col_num.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Contact, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Contact, String> p) {
-                return new SimpleObjectProperty<>(p.getValue().getNumero());
-            }
-        });
-        tableau.getColumns().add(col_num);
-
-        //colone nom
-        col_nom = new TableColumn<>("Nom");
-        col_nom.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Contact, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Contact, String> p) {
-                return new SimpleObjectProperty<>(p.getValue().getNom());
-            }
-        });
-        tableau.getColumns().add(col_nom);
-        try {
-            tableau.setItems(dc.getList());
-        } catch (Exception ex) {
-            Boite.showException(ex, "initTable");
-        }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        initTable();
+        tableau.getColumns().add(colone);
     }
 
 }

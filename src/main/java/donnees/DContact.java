@@ -26,7 +26,7 @@ public class DContact extends DAO<Contact>{
         pre = XConnection.connecter().prepareStatement(sql);
         pre.setInt(1, b.getId());
         pre.setString(2, b.getNumero());
-        pre.setString(3, b.getNom());
+        pre.setString(3, b.getNom().get().toUpperCase());
         
         return pre.executeUpdate() > 0;
         
@@ -45,7 +45,7 @@ public class DContact extends DAO<Contact>{
                 + "WHERE id_c=?";
         pre = XConnection.connecter().prepareStatement(sql);
         
-        pre.setString(1, b.getNom());
+        pre.setString(1, b.getNom().get().toUpperCase());
         pre.setInt(2, b.getId());
         
         return pre.executeUpdate() > 0;
