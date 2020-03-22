@@ -33,7 +33,7 @@ public class Main extends Application{
         
         BorderPane pan = (BorderPane) FXMLLoader.load(getClass().getResource("main.fxml"));
         Scene scene = new Scene(pan);
-        scene.getStylesheets();
+        
         s.setScene(scene);
         
         s.setOnCloseRequest(new EventHandler<WindowEvent>() {
