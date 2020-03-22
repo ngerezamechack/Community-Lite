@@ -33,7 +33,7 @@
       </Button>
       <Button layoutX="208.0" layoutY="232.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
       <Button layoutX="295.0" layoutY="232.0" mnemonicParsing="false" onAction="#rafraichir" text="Rafrachir" />
-      <Hyperlink fx:id="notif" contentDisplay="RIGHT" layoutX="377.0" layoutY="442.0" prefHeight="23.0" prefWidth="441.0" text="Messages" />
+      <Hyperlink fx:id="notif" contentDisplay="RIGHT" layoutX="377.0" layoutY="442.0" onAction="#envoiBrouilon" prefHeight="23.0" prefWidth="441.0" text="Messages" />
       <TableView fx:id="tableau" focusTraversable="false" layoutX="377.0" layoutY="70.0" onMouseClicked="#tableau" prefHeight="366.0" prefWidth="441.0" />
    </children>
 </fx:root>
