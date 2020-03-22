@@ -99,10 +99,11 @@ public class DContact extends DAO<Contact>{
     @Override
     public ObservableList<Contact> getList(Contact b) throws Exception {
         sql = "SELECT * FROM contact "
-                + "WHERE nom Like '%"+b.getNom()+"%' ORDER BY nom";
+                + "WHERE nom Like ? ORDER BY nom";
         data = FXCollections.observableArrayList();
         
         pre = XConnection.connecter().prepareStatement(sql);
+        pre.setString(1, "%"+b.getNom().get()+"%");
         res = pre.executeQuery();
         
         while(res.next()){
