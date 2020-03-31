@@ -11,16 +11,35 @@ and open the template in the editor.
 
 
 .button{
-    -fx-background-color :darkgray;
+    -fx-background-color : deepskyblue;
     -fx-text-fill:#ffffff;
 }
 
 .button:hover{
-    -fx-background-color : lightgray;
-    -fx-text-fill:black;
+    -fx-background-color : #3366ff;
 }
 
 .button:pressed{
     -fx-background-color : black;
-    -fx-text-fill:#ffffff;
+}
+
+.panneau{
+    -fx-background-radius: 0.6em;
+    -fx-background-color: white;
+}
+
+
+.titre{
+    -fx-background-color: deepskyblue;
+    -fx-background-radius: 0.3em 0.3em 0 0;
+    -fx-text-fill:white;
+}
+
+
+
+.ligne{
+    -fx-border-color: gray;
+}
+.ligne .label{
+    -fx-text-fill:black;
 }

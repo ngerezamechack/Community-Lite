@@ -12,28 +12,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="840.0" style="-fx-border-color: blue; -fx-background-color: white;" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="840.0" styleClass="panneau" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="379.0" layoutY="40.0" text="Recherche" />
-      <Label layoutX="40.0" layoutY="40.0" text="ID" />
-      <Label layoutX="40.0" layoutY="101.0" text="Numéro" />
-      <Label layoutX="40.0" layoutY="161.0" text="Nom" />
-      <Label layoutX="40.0" layoutY="284.0" text="Message" />
-      <TextField fx:id="tid" editable="false" layoutX="40.0" layoutY="68.0" promptText="ID" />
-      <TextField fx:id="tnum" layoutX="40.0" layoutY="124.0" prefHeight="25.0" prefWidth="149.0" promptText="Numéro de téléphone" />
-      <TextField fx:id="tnom" layoutX="40.0" layoutY="181.0" prefHeight="25.0" prefWidth="318.0" promptText="Nom complet" />
-      <TextField fx:id="tch" layoutX="477.0" layoutY="36.0" onTextChange="#chercher" prefHeight="25.0" prefWidth="342.0" />
-      <TextArea fx:id="tm" layoutX="40.0" layoutY="301.0" prefHeight="128.0" prefWidth="318.0" promptText="Message" />
-      <Button layoutX="42.0" layoutY="232.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="72.0" text="Ajouter" />
-      <Button layoutX="129.0" layoutY="232.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
-      <Button layoutX="42.0" layoutY="441.0" mnemonicParsing="false" onAction="#envoyer" prefHeight="25.0" prefWidth="318.0" text="Envoyer" textFill="#2f0808">
+      <Label layoutX="378.0" layoutY="100.0" text="Recherche" />
+      <Label layoutX="39.0" layoutY="100.0" text="ID" />
+      <Label layoutX="39.0" layoutY="161.0" text="Numéro" />
+      <Label layoutX="39.0" layoutY="221.0" text="Nom" />
+      <Label layoutX="39.0" layoutY="344.0" text="Message" />
+      <TextField fx:id="tid" editable="false" layoutX="39.0" layoutY="128.0" promptText="ID" />
+      <TextField fx:id="tnum" layoutX="39.0" layoutY="184.0" prefHeight="25.0" prefWidth="149.0" promptText="Numéro de téléphone" />
+      <TextField fx:id="tnom" layoutX="39.0" layoutY="241.0" prefHeight="25.0" prefWidth="318.0" promptText="Nom complet" />
+      <TextField fx:id="tch" layoutX="476.0" layoutY="96.0" onTextChange="#chercher" prefHeight="25.0" prefWidth="342.0" />
+      <TextArea fx:id="tm" layoutX="39.0" layoutY="361.0" prefHeight="128.0" prefWidth="318.0" promptText="Message" />
+      <Button layoutX="41.0" layoutY="292.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="72.0" text="Ajouter" />
+      <Button layoutX="128.0" layoutY="292.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
+      <Button id="envoi" layoutX="41.0" layoutY="501.0" mnemonicParsing="false" onAction="#envoyer" prefHeight="25.0" prefWidth="318.0" text="Envoyer" textFill="#2f0808">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="208.0" layoutY="232.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
-      <Button layoutX="295.0" layoutY="232.0" mnemonicParsing="false" onAction="#rafraichir" text="Rafrachir" />
-      <Hyperlink fx:id="notif" contentDisplay="RIGHT" layoutX="377.0" layoutY="442.0" onAction="#envoiBrouilon" prefHeight="23.0" prefWidth="441.0" text="Messages" />
-      <TableView fx:id="tableau" focusTraversable="false" layoutX="377.0" layoutY="70.0" onMouseClicked="#tableau" prefHeight="366.0" prefWidth="441.0" />
+      <Button layoutX="207.0" layoutY="292.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+      <Button layoutX="294.0" layoutY="292.0" mnemonicParsing="false" onAction="#rafraichir" text="Rafrachir" />
+      <Hyperlink fx:id="notif" contentDisplay="RIGHT" layoutX="376.0" layoutY="502.0" onAction="#envoiBrouilon" prefHeight="23.0" prefWidth="441.0" text="Messages" />
+      <TableView fx:id="tableau" focusTraversable="false" layoutX="376.0" layoutY="130.0" onMouseClicked="#tableau" prefHeight="366.0" prefWidth="441.0" />
+      <Label alignment="CENTER" prefHeight="71.0" prefWidth="840.0" styleClass="titre" text="Membre">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
    </children>
 </fx:root>

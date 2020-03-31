@@ -6,12 +6,11 @@
 package vues;
 
 import beans.Boite;
+import controlers.Menu;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -31,8 +30,11 @@ public class Main extends Application{
     @Override
     public void start(Stage s) throws Exception {
         
-        BorderPane pan = (BorderPane) FXMLLoader.load(getClass().getResource("main.fxml"));
-        Scene scene = new Scene(pan);
+        Menu root = new Menu();
+        
+        
+        Scene scene = new Scene(root);
+        scene.getStylesheets().addAll(getClass().getResource("/styles/styles.css").toExternalForm());
         
         s.setScene(scene);
         

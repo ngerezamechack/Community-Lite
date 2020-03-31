@@ -5,44 +5,60 @@
  */
 package controlers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 
 /**
  *
  * @author NGEREZA
  */
-public class Menu implements Initializable{
+public class Menu extends BorderPane{
 
     
     private CContact contact = new CContact();
-    @FXML
-    private BorderPane pan;
     
     private CAuth auth = new CAuth();
     
     
+    public Menu(){
+        FXMLLoader load = new FXMLLoader(getClass().getResource("/vues/main.fxml"));
+        load.setRoot(this);
+        load.setController(this);
+        
+        try{
+            load.load();
+            
+            BackgroundImage bi = new BackgroundImage(new Image(getClass().getResourceAsStream("/images/font1.jpg")), 
+                BackgroundRepeat.NO_REPEAT, 
+                BackgroundRepeat.ROUND, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+                this.setBackground(new Background(bi));
+                
+                this.setCenter(contact);
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
+    }
+    
     
     @FXML
     private void autorisation(ActionEvent ev){
-        pan.setCenter(auth);
+        this.setCenter(auth);
     }
     
     
     @FXML
     private void contact(ActionEvent ev){
-        pan.setCenter(contact);
-    }
-    
-    
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        pan.setCenter(contact);
+        this.setCenter(contact);
     }
     
 }
