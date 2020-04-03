@@ -8,6 +8,7 @@ package vues;
 import beans.Boite;
 import controlers.Menu;
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -20,6 +21,9 @@ import javafx.stage.WindowEvent;
  */
 public class Main extends Application{
 
+   
+    
+    private static HostServices hser;
     /**
      * @param args the command line arguments
      */
@@ -51,6 +55,13 @@ public class Main extends Application{
         s.setMaximized(true);
         s.getIcons().add(new Image(getClass().getResourceAsStream("/images/Community.png")));
         s.show();
+        
+        hser = getHostServices();
     }
     
+    
+    
+    public static void openurl(String url){
+        hser.showDocument(url);
+    }
 }

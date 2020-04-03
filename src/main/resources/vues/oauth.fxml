@@ -24,5 +24,6 @@
       <TextField fx:id="tauth" layoutX="172.0" layoutY="93.0" prefHeight="25.0" prefWidth="294.0" promptText="Authorisation" />
       <TextField fx:id="tname" layoutX="172.0" layoutY="138.0" prefHeight="25.0" prefWidth="294.0" promptText="Non du service" />
       <TextField fx:id="tnum" layoutX="172.0" layoutY="180.0" prefHeight="25.0" prefWidth="178.0" promptText="Numèro de service" />
+      <Hyperlink fx:id="lien" layoutX="172.0" layoutY="211.0" onAction="#orange" prefHeight="23.0" prefWidth="294.0" text="Récuperer l'autorisation" />
    </children>
 </fx:root>

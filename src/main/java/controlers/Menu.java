@@ -6,6 +6,7 @@
 package controlers;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
@@ -15,6 +16,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
+import vues.Main;
 
 /**
  *
@@ -36,9 +38,9 @@ public class Menu extends BorderPane{
         try{
             load.load();
             
-            BackgroundImage bi = new BackgroundImage(new Image(getClass().getResourceAsStream("/images/font1.jpg")), 
-                BackgroundRepeat.NO_REPEAT, 
-                BackgroundRepeat.ROUND, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+            BackgroundImage bi = new BackgroundImage(new Image(getClass().getResourceAsStream("/images/img12.png")), 
+                BackgroundRepeat.ROUND, 
+                BackgroundRepeat.ROUND, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
                 this.setBackground(new Background(bi));
                 
                 this.setCenter(contact);
@@ -61,4 +63,13 @@ public class Menu extends BorderPane{
         this.setCenter(contact);
     }
     
+    
+    @FXML
+    private void facebook(Event ev){
+        Main.openurl("https://web.facebook.com/ngerezaelectronicarts");
+    }
+    @FXML
+    private void youtube(Event ev){
+        Main.openurl("https://www.youtube.com/channel/UCqYV6a0fFRDlL-glNqB_sjQ?view_as=subscriber");
+    }
 }

@@ -6,7 +6,7 @@
 package beans;
 
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
@@ -202,8 +202,6 @@ public class Boite {
     public static int intervale(LocalDate date){
         
         LocalDate ld = LocalDate.now();
-        Period period = Period.between(date, ld);
-        
-        return period.getDays();
+        return (int) ChronoUnit.DAYS.between(ld, date);
     }
 }

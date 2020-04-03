@@ -13,8 +13,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import vues.Main;
 
 /**
  *
@@ -24,6 +26,8 @@ public class CAuth extends AnchorPane{
     
     @FXML
     private TextField tauth,tname,tnum;
+    @FXML
+    private Hyperlink lien;
     
     //les donn�es
     private DAuth dauth = new DAuth();
@@ -96,13 +100,18 @@ public class CAuth extends AnchorPane{
             tauth.setText(oauth.getAuthorization());
             tname.setText(oauth.getSenderName());
             tnum.setText(oauth.getSenderAddress());
+            lien.setVisible(false);
         }else{
             Boite.vider(tauth,tname,tnum);
+            lien.setVisible(true);
         }
         
     }
     
     
-    
+    @FXML
+    private void orange(ActionEvent ev){
+        Main.openurl("https://developer.orange.com/apis/sms/");
+    }
     
 }
